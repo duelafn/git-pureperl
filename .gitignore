@@ -9,6 +9,7 @@ blib*
 pm_to_blib
 test-init-bare.git
 t/checkout/*
+test-project-nontrivial/*
 test-project-packs/*
 test-project-packs2/*
 test-project/*

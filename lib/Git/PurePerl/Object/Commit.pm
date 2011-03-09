@@ -91,5 +91,28 @@ sub parents {
     return map { $self->git->get_object( $_ ) } @{$self->parent_sha1s};
 }
 
+sub get_path {
+    my $self = shift;
+    my @path = split /\//, shift;
+    my $tree = $self->tree;
+
+  PATH_COMPONENT:
+    while (@path) {
+        return unless 'tree' eq $tree->kind;
+        my $component = shift @path;
+        next unless length($component);
+        my $entries = $tree->directory_entries;
+        for (@$entries) {
+            next unless $_->filename eq $component;
+            $tree = $_->object;
+            next PATH_COMPONENT;
+        }
+        return;
+    }
+
+    return $tree;
+}
+
+
 __PACKAGE__->meta->make_immutable;
 
