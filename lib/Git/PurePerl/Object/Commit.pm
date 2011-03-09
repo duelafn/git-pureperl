@@ -116,3 +116,58 @@ sub get_path {
 
 __PACKAGE__->meta->make_immutable;
 
+__END__
+
+=head1 NAME
+
+Git::PurePerl::Object::Commit - Git Commit Object
+
+=head1 SYNOPSIS
+
+    my $git = Git::PurePerl->new(
+        directory => '/path/to/git/'
+    );
+    my $commit = $git->master;
+
+    for my $entry ($commit->tree->directory_entries) {
+        # ...
+    }
+
+    my $blob = $commit->get_path( "foo/bar/baz.txt" );
+
+=head1 METHODS
+
+=over 4
+
+=item kind
+
+=item tree_sha1
+
+=item parent_sha1s
+
+=item parent_sha1
+
+=item parent
+
+=item parents
+
+=item author
+
+=item authored_time
+
+=item committer
+
+=item committed_time
+
+=item comment
+
+=item encoding
+
+=item tree
+
+=item get_path
+
+ my $tree = $commit->get_path( "foo/bar" );
+ my $blob = $commit->get_path( "foo/bar/baz.txt" );
+
+=cut
